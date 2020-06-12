@@ -3,6 +3,10 @@
 use Swoole\Http\Request;
 use Swoole\Http\Response;
 
+$host = "0.0.0.0";
+
+$port = "9509";
+
 const WEBROOT = __DIR__ . '/web';
 
 $subject_connnection_map = array();
@@ -10,8 +14,8 @@ $subject_connnection_map = array();
 error_reporting(E_ALL);
 
 \Swoole\Coroutine\run(
-    function () {
-        $server = new Swoole\Coroutine\Http\Server('0.0.0.0', 9509, false);
+    function () use ($host,$port) {
+        $server = new Swoole\Coroutine\Http\Server($host,$port, false,false);
 //        $server = new Swoole\Coroutine\Http\Server('0.0.0.0', 9509, true);
 //        $server->set(
 //            [
@@ -23,6 +27,10 @@ error_reporting(E_ALL);
         $server->handle(
             '/',
             function (Request $req, Response $resp) {
+                var_dump($req);
+
+                var_dump($resp);
+
                 //websocket
                 if (isset($req->header['upgrade']) and $req->header['upgrade'] == 'websocket') {
                     $resp->upgrade();
@@ -49,7 +57,7 @@ error_reporting(E_ALL);
                                 break;
                         }
                     }
-                    destry_connection($resp);
+                    destory_connection($resp);
                     return;
                 }
                 //http
@@ -135,7 +143,7 @@ function publish($subject, $event, $data, $exclude)
 }
 
 // 清理主题映射数组
-function destry_connection($connection)
+function destory_connection($connection)
 {
     foreach ($connection->subjects as $subject) {
         unsubscribe($subject, $connection);

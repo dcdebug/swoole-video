@@ -1,6 +1,14 @@
 {
-  "require": {
-    "ext-json": "*",
-    "ext-swoole": "*"
-  }
+    "name": "darry/voice",
+    "description": "swoole视频语音通话",
+    "type": "library",
+    "license": "mit",
+    "authors": [
+        {
+            "name": "d.c",
+            "email": "chengyue.wang@iservernetwork.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
 }

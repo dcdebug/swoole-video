@@ -67,7 +67,12 @@
 <body>
 
 <div class="videos">
-    <video id="localVideo" autoplay style="width:200px;height:100px;" muted="true"></video>
+    <span>我的视频</span>
+    <video id="localVideo" autoplay style="width:400px;height:500px;" muted="true"></video>
+
+    <hr/>
+    <p>好友的视频</p>
+    <hr/>
     <video id="remoteVideo" autoplay style="width:200px;height:100px;"></video>
 <!--    class="hidden"-->
 </div>
